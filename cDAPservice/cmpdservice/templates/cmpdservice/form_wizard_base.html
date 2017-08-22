@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{#{% block head %}#}
+{#{{ wizard.form.media }}#}
+{#{% endblock %}#}
+
+{% block title %}
+Form wizard for App Registration
+{% endblock %}
+
+{% block content %}
+    <h3>Halo, this is Rob Test for you to start regist your scripts to services</h3>
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+
+{#<div class="row">#}
+<div class="col-md-6">
+<div class="well">
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+{{ wizard.management_form }}
+{% load crispy_forms_tags %}
+
+{% if wizard.form.forms %}
+    {{ wizard.form.management_form }}
+    {% for form in wizard.form.forms %}
+        {% crispy form %}
+    {% endfor %}
+{% else %}
+    {% crispy wizard.form %}
+{% endif %}
+
+
+</form>
+</div>
+</div>
+{#</div>#}
+
+
+{% endblock %}
